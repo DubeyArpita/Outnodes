@@ -1,0 +1,90 @@
+body{
+    background: linear-gradient(45deg, #f3676b, #fad0c4, #fad0c4, #f991dc, #a18cd1);
+  background-size: 400% 400%;
+  animation: gradientMove 5s infinite alternate;
+}
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+.categories-container {
+    text-align: center;
+    padding: 50px 20px;
+  }
+/* Category Card */
+.categories-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .categories-subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 30px;
+  }
+.category-card {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Adjust card height */
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-align: center;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+    flex-direction: column; /* Stack items vertically */
+  }
+  
+  .category-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Background Image */
+  .category-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5); /* Darken the image for readability */
+    transition: filter 0.3s ease-in-out;
+  }
+  
+  /* Overlay Content - Centered */
+  .category-card h3,
+  .category-card p,
+  .category-card .btn {
+    position: relative;
+    z-index: 1;
+    margin: 10px 0;
+    display: block; /* Ensures vertical stacking */
+  }
+  
+  /* Button Styling */
+  .btn {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: 1px solid white;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Apply Background Image to Each Card Dynamically */
+  .category-card:nth-child(1)::before { background-image: url("../assets/food.jpg"); }
+  .category-card:nth-child(2)::before { background-image: url("../assets/monuments.jpg"); }
+  .category-card:nth-child(3)::before { background-image: url("../assets/club.jpg"); }
+  .category-card:nth-child(4)::before { background-image: url("../assets/entertainment.jpg"); }
+  

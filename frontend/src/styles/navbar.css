@@ -1,0 +1,100 @@
+/* Default body padding (For all pages except Home) */
+body {
+    padding-top: 80px; /* Matches navbar height */
+    margin: 0;
+  }
+  
+  /* Remove padding for Home Page */
+  body.home-page {
+    padding-top: 0;
+  }
+  
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 70px; /* Fixed height for consistency */
+  }
+  
+  /* Logo */
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Ensure logo text is vertically centered */
+    height: 100%; /* Matches navbar height */
+  }
+  
+  /* Navigation Links */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center; /* Ensure all links are in one straight line */
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    font-size: 1rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .nav-links a:hover {
+    color: #007bff;
+  }
+  
+  /* Auth Buttons (Login & Signup) */
+  .auth-buttons {
+    display: flex;
+    align-items: center; /* Ensure buttons are aligned with links */
+    gap: 15px;
+  }
+  
+  .login-btn {
+    font-size: 1rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .signup-btn {
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    background: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .signup-btn:hover {
+    background: #333;
+  }
+  
+  /* Fix Content Being Hidden Behind Navbar */
+ 
+  
