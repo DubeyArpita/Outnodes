@@ -22,7 +22,7 @@ function Home() {
       {/* Content Overlay */}
       <div className="content">
         <h1 className="welcome-text">
-          Welcome to <span className="highlight">Outnodes</span> 🚀
+          Welcome, <span className="highlight">Node!</span> 
         </h1>
         <p className="lead-text">Discover amazing places around you!</p>
         
