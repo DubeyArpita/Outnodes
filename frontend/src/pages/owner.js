@@ -1,47 +1,147 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import FoodOutletForm from "../components/FoodOutletForm";
+import MonumentsNatureForm from "../components/MonumentsNatureForm";
+import ClubsNightlifeForm from "../components/ClubsNightlifeForm";
+import GamingEntertainmentForm from "../components/GamingEntertainmentForm";
+import Chart from "chart.js/auto"; // Import Chart.js
+import "../styles/owner.css";
 
-const dummyPlaces = [
-  { id: 1, name: "Sunset Café", category: "Food", location: "Uptown" }
+const places = [
+  { id: 1, name: "Cafe Mocha", category: "Food Outlets", location: "Downtown, City Center", rating: 4.5 },
+  { id: 2, name: "Green Valley Park", category: "Monuments & Nature", location: "Uptown Area", rating: 4.8 },
 ];
 
 function OwnerDashboard() {
-  const [places, setPlaces] = useState(dummyPlaces);
-  const [newPlace, setNewPlace] = useState({ name: "", category: "", location: "" });
+  const [selectedCategory, setSelectedCategory] = useState(""); // Track selected category
+  const [showModal, setShowModal] = useState(false); // Track modal visibility
+  const [currentIndex, setCurrentIndex] = useState(0); // Track carousel index
 
-  // Add a new place
-  const handleAddPlace = () => {
-    if (newPlace.name && newPlace.category && newPlace.location) {
-      setPlaces([...places, { id: places.length + 1, ...newPlace }]);
-      setNewPlace({ name: "", category: "", location: "" });
+  // Handle opening the modal with the selected category
+  const handleOpenModal = (category) => {
+    setSelectedCategory(category);
+    setShowModal(true);
+  };
+
+  // Handle closing the modal
+  const handleCloseModal = () => {
+    setSelectedCategory("");
+    setShowModal(false);
+  };
+
+  // Render the appropriate form based on the selected category
+  const renderForm = () => {
+    switch (selectedCategory) {
+      case "Food Outlets":
+        return <FoodOutletForm />;
+      case "Monuments & Nature":
+        return <MonumentsNatureForm />;
+      case "Clubs & Nightlife":
+        return <ClubsNightlifeForm />;
+      case "Gaming & Entertainment":
+        return <GamingEntertainmentForm />;
+      default:
+        return null;
     }
   };
 
-  return (
-    <div className="container mt-5">
-      <h1 className="text-primary">Owner Dashboard</h1>
+  // Handle Carousel Navigation
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % places.length);
+  };
 
-      {/* Add Place Form */}
-      <div className="card p-3 mb-4 shadow-lg">
-        <h5 className="fw-bold">Add New Place</h5>
-        <input type="text" className="form-control mb-2" placeholder="Name" value={newPlace.name} onChange={(e) => setNewPlace({ ...newPlace, name: e.target.value })} />
-        <input type="text" className="form-control mb-2" placeholder="Category" value={newPlace.category} onChange={(e) => setNewPlace({ ...newPlace, category: e.target.value })} />
-        <input type="text" className="form-control mb-2" placeholder="Location" value={newPlace.location} onChange={(e) => setNewPlace({ ...newPlace, location: e.target.value })} />
-        <button className="btn btn-primary w-100" onClick={handleAddPlace}>Add Place</button>
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + places.length) % places.length);
+  };
+
+  // Initialize Analytics Graph
+  useEffect(() => {
+    const ctx = document.getElementById("analytics-graph").getContext("2d");
+  
+    // Destroy previous instance of Chart before creating a new one
+    let existingChart = Chart.getChart("analytics-graph"); 
+    if (existingChart) {
+      existingChart.destroy();
+    }
+  
+    const analyticsChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Total Places", "Avg Rating", "Reviews"],
+        datasets: [{
+          label: "Owner Stats",
+          data: [5, 4.3, 23], // Example data
+          backgroundColor: ["#ff9800", "#8e44ad", "#e91e63"],
+        }]
+      }
+    });
+  
+    // Cleanup function to destroy the chart when component unmounts
+    return () => {
+      analyticsChart.destroy();
+    };
+  }, []);
+  
+
+  return (
+    <div className="owner-dashboard">
+      <h1>Owner Dashboard</h1>
+
+      {/* Add Place Section */}
+      <div className="add-place-section">
+        <h2>Add Your Place</h2>
+        <div className="category-buttons">
+          <Button variant="primary" onClick={() => handleOpenModal("Food Outlets")}>
+            Add Food Outlet
+          </Button>
+          <Button variant="primary" onClick={() => handleOpenModal("Monuments & Nature")}>
+            Add Monument/Nature Spot
+          </Button>
+          <Button variant="primary" onClick={() => handleOpenModal("Clubs & Nightlife")}>
+            Add Club/Nightlife Spot
+          </Button>
+          <Button variant="primary" onClick={() => handleOpenModal("Gaming & Entertainment")}>
+            Add Gaming/Entertainment Venue
+          </Button>
+        </div>
       </div>
 
-      {/* Owner's Listed Places */}
-      <div className="row">
-        {places.map((place) => (
-          <div className="col-md-4 mb-4" key={place.id}>
-            <div className="card p-3 shadow-sm">
-              <h5>{place.name}</h5>
-              <p><strong>Category:</strong> {place.category}</p>
-              <p><strong>Location:</strong> {place.location}</p>
-              <button className="btn btn-warning btn-sm me-2">Edit</button>
-              <button className="btn btn-danger btn-sm">Delete</button>
+      {/* Modal for Adding Place */}
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Add {selectedCategory}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{renderForm()}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Places List - Sliding Carousel */}
+      <div className="places-carousel">
+        <button className="carousel-btn prev" onClick={prevSlide}>❮</button>
+        <div className="places-slider" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+          {places.map((place, index) => (
+            <div key={place.id} className="place-card">
+              <h3>{place.name}</h3>
+              <p><b>Category:</b> {place.category}</p>
+              <p><b>Location:</b> {place.location}</p>
+              <p><b>Rating:</b> {place.rating} ⭐</p>
+              <div className="actions">
+                <Button variant="success">Edit</Button>
+                <Button variant="danger">Delete</Button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <button className="carousel-btn next" onClick={nextSlide}>❯</button>
+      </div>
+
+      {/* Analytics Section with Graph */}
+      <div className="analytics-section">
+        <h2>Analytics</h2>
+        <canvas id="analytics-graph"></canvas>
       </div>
     </div>
   );

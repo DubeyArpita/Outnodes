@@ -1,0 +1,139 @@
+/* Owner Dashboard - Better Font & Styling */
+.owner-dashboard {
+    font-family: 'Poppins', sans-serif; /* Use a modern font */
+    color: #333;
+    padding: 20px;
+  }
+  
+  /* Section Titles */
+  .add-place-section h2,
+  .place-list-section h2,
+  .analytics-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  /* Add Place Buttons */
+  .category-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .category-buttons button {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .category-buttons button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff5722, #e91e63);
+  }
+  
+  /* Places List - Full Width Carousel */
+  .places-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: 30px 0;
+  }
+  
+  .places-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .place-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  /* Carousel Arrows */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  /* Edit & Delete Buttons */
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .edit-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #b91c1c;
+  }
+  
+  /* Analytics Section - Graph Style */
+  .analytics-section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+  }
+  
+  /* Graph Container */
+  #analytics-graph {
+    width: 100%;
+    height: 250px;
+  }
+  
