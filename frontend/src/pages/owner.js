@@ -57,9 +57,14 @@ function OwnerDashboard() {
 
   // Initialize Analytics Graph
   useEffect(() => {
-    const ctx = document.getElementById("analytics-graph").getContext("2d");
+    const canvas = document.getElementById("analytics-graph");
+    const ctx = canvas.getContext("2d");
   
-    // Destroy previous instance of Chart before creating a new one
+    // Set fixed width & height before creating chart
+    canvas.width = 500; // Adjust width
+    canvas.height = 400; // Adjust height
+  
+    // Destroy existing chart before creating a new one
     let existingChart = Chart.getChart("analytics-graph"); 
     if (existingChart) {
       existingChart.destroy();
@@ -74,14 +79,17 @@ function OwnerDashboard() {
           data: [5, 4.3, 23], // Example data
           backgroundColor: ["#ff9800", "#8e44ad", "#e91e63"],
         }]
+      },
+      options: {
+        responsive: false, // Disable auto-resizing
+        maintainAspectRatio: false, // Allow custom sizing
       }
     });
   
-    // Cleanup function to destroy the chart when component unmounts
     return () => {
       analyticsChart.destroy();
     };
-  }, []);
+  }, []);  
   
 
   return (
@@ -140,7 +148,7 @@ function OwnerDashboard() {
 
       {/* Analytics Section with Graph */}
       <div className="analytics-section">
-        <h2>Analytics</h2>
+        <h2 id="analytics-title">Analytics</h2>
         <canvas id="analytics-graph"></canvas>
       </div>
     </div>

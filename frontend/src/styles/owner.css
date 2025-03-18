@@ -131,9 +131,24 @@
     margin-top: 30px;
   }
   
-  /* Graph Container */
-  #analytics-graph {
-    width: 100%;
-    height: 250px;
+ /* Graph Container */
+
+.analytics-section {
+    display: flex;
+    /* justify-content: center; */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
   }
+  
+  #analytics-graph {
+    max-width: 500px; /* Set max size */
+    max-height: 450px;
+  }
+  #analytics-title{
+    padding-right: 190px;
+    padding-left: 40px;
+}
   
