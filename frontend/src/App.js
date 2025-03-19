@@ -7,6 +7,7 @@ import Categories from "./pages/categories";
 import UserDashboard from "./pages/user";
 import OwnerDashboard from "./pages/owner";
 import AdminPanel from "./pages/admin";
+import FoodOutlets from "./categories/pages/FoodOutlets"; // Import Food Outlets Page
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function AppContent() {
         <Route path="/user" element={<UserDashboard />} />
         <Route path="/owner" element={<OwnerDashboard />} />
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/food-outlets" element={<FoodOutlets />} /> {/* Add Food Outlets Route */}
       </Routes>
     </>
   );
