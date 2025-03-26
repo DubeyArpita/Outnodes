@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import "../styles/admin.css";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import FoodOutletForm from "../components/FoodOutletForm";
+import MonumentsNatureForm from "../components/MonumentsNatureForm";
+import ClubsNightlifeForm from "../components/ClubsNightlifeForm";
+import GamingEntertainmentForm from "../components/GamingEntertainmentForm";
 
 const dummyUsers = [
   { id: 1, name: "John Doe", role: "Owner" },
@@ -17,6 +24,8 @@ function AdminPanel() {
   const [users, setUsers] = useState(dummyUsers);
   const [places, setPlaces] = useState(dummyPlaces);
   const [reviews, setReviews] = useState(dummyReviews);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   // Delete a User
   const handleDeleteUser = (id) => {
@@ -31,6 +40,35 @@ function AdminPanel() {
   // Delete a Review
   const handleDeleteReview = (id) => {
     setReviews(reviews.filter(review => review.id !== id));
+  };
+
+  // Handle Modal Opening
+  const handleOpenModal = () => {
+    if (selectedCategory) {
+      setShowModal(true);
+    }
+  };
+
+  // Handle Modal Closing
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedCategory("");
+  };
+
+  // Render the form based on selected category
+  const renderForm = () => {
+    switch (selectedCategory) {
+      case "Food Outlets":
+        return <FoodOutletForm />;
+      case "Monuments & Nature":
+        return <MonumentsNatureForm />;
+      case "Clubs & Nightlife":
+        return <ClubsNightlifeForm />;
+      case "Gaming & Entertainment":
+        return <GamingEntertainmentForm />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -112,6 +150,29 @@ function AdminPanel() {
         </table>
       </div>
 
+      {/* Add Place Section */}
+      <div className="add-place-section">
+        <h5>Add New Place</h5>
+        <select className="category-select" onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value="">Select Category</option>
+          <option value="Food Outlets">Food Outlets</option>
+          <option value="Monuments & Nature">Monuments & Nature</option>
+          <option value="Clubs & Nightlife">Clubs & Nightlife</option>
+          <option value="Gaming & Entertainment">Gaming & Entertainment</option>
+        </select>
+        <button className="btn-add-place" onClick={handleOpenModal}>Add Place</button>
+      </div>
+
+      {/* Modal for Adding Place */}
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Add {selectedCategory}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{renderForm()}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

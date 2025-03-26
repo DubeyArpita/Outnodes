@@ -1,0 +1,104 @@
+/* Admin Panel - Main Container */
+.container {
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #e6ff9a, #c4f5fa);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Admin Title */
+  h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  /* Cards */
+  .card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    background: white;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  
+  /* Section Titles */
+  .card h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 15px;
+  }
+  
+  /* Table Styling */
+  .table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .table thead {
+    background: #007bff;
+    color: white;
+  }
+  
+  .table tbody tr {
+    transition: 0.3s ease-in-out;
+  }
+  
+  .table tbody tr:hover {
+    background: #f8f9fa;
+  }
+  
+  /* Delete Buttons */
+  .btn-danger {
+    transition: all 0.3s ease;
+    font-weight: bold;
+    display: inline-block;
+    background-color: rgb(10, 65, 113);
+  }
+  
+  .btn-danger:hover {
+    background: #c82333;
+    transform: scale(1.05);
+  }
+  
+  /* Add Place Section */
+  .add-place-section {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .add-place-section h5 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .category-select {
+    margin: 15px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .btn-add-place {
+    background: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-add-place:hover {
+    background: #218838;
+    transform: scale(1.05);
+  }
+  
