@@ -78,7 +78,6 @@ function UserDashboard() {
       <footer className="dashboard-footer">
         <Button variant="primary">Send Feedback</Button>
         <Button variant="secondary">Customer Care</Button>
-        <Button variant="danger">Log Out</Button>
       </footer>
     </Container>
   );

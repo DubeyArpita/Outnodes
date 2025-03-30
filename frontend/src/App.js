@@ -1,41 +1,41 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/login";
 import Navbar from "./components/navbar";
 import Home from "./pages/home";
 import Categories from "./pages/categories";
 import UserDashboard from "./pages/user";
-import OwnerDashboard from "./pages/owner";
-import AdminPanel from "./pages/admin";
-import FoodOutlets from "./categories/pages/FoodOutlets"; // Import Food Outlets Page
+import ListYourPlace from "./pages/owner";
+import AdminDashboard from "./pages/admin";
+// import ManageUsers from "./pages/ManageUsers";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Signup from "./pages/signup";
 
 function App() {
   return (
     <Router>
-      <AppContent />
-    </Router>
-  );
-}
+      <Navbar />
 
-function AppContent() {
-  const location = useLocation();
-  const isHomePage = location.pathname === "/"; // Check if the current page is Home
-
-  return (
-    <>
-      {/* Show Navbar on all pages EXCEPT Home */}
-      {!isHomePage && <Navbar />}
-
-      {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/user" element={<UserDashboard />} />
-        <Route path="/owner" element={<OwnerDashboard />} />
-        <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/food-outlets" element={<FoodOutlets />} /> {/* Add Food Outlets Route */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute allowedRoles={["node"]} />}>
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/user" element={<UserDashboard />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={["owner"]} />}>
+          <Route path="/owner" element={<ListYourPlace />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          {/* <Route path="/manage-users" element={<ManageUsers />} /> */}
+        </Route>
       </Routes>
-    </>
+    </Router>
   );
 }
 
