@@ -6,7 +6,7 @@ const categories = [
   {
     name: "Food Outlets",
     description: "Find the best restaurants and cafés around you.",
-    route: "/food-outlets", // Route for Food Outlets
+    route: "/FoodOutlets", // Route for Food Outlets
   },
   {
     name: "Monuments & Nature",

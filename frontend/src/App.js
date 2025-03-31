@@ -9,6 +9,7 @@ import AdminDashboard from "./pages/admin";
 // import ManageUsers from "./pages/ManageUsers";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Signup from "./pages/signup";
+import FoodOutlet from "./categories/pages/FoodOutlets";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route element={<ProtectedRoute allowedRoles={["node"]} />}>
           <Route path="/categories" element={<Categories />} />
           <Route path="/user" element={<UserDashboard />} />
+          <Route path="/FoodOutlets" element={<FoodOutlet />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={["owner"]} />}>
