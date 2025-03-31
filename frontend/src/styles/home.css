@@ -25,9 +25,9 @@
   .content {
     position: relative;
     z-index: 1;
-    color: white;
+    color: blue; /* Changed text color to blue */
     text-align: center;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better readability */
+    background: white; /* Changed from transparent black to white */
     padding: 10px;
     border-radius: 10px;
     max-width: 80%;
@@ -42,7 +42,7 @@
   .welcome-text {
     font-size: 3rem;
     font-weight: bold;
-    color: white;
+    color: #007bff;
   }
   
   /* Rocket Animation */
@@ -60,8 +60,7 @@
   /* Subtitle */
   .lead-text {
     font-size: 1.5rem;
-    color: #ddd;
-    margin-bottom: 30px;
+    color: rgb(55, 55, 55); /* Changed text color to blue */
   }
   
   /* Banner Styling */
