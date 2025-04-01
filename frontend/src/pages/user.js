@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";  
+import FeedbackModal from "../components/FeedbackModal";  // Import FeedbackModal
+import CustomerCareModal from "../components/CustomerCareModal"; // Import CustomerCareModal
 import "../styles/user.css"; // Updated CSS
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 
@@ -21,6 +23,9 @@ function UserDashboard() {
     rating: 4.7,
     status: "Customer",
   };
+
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [showCustomerCare, setShowCustomerCare] = useState(false);
 
   return (
     <Container className="user-dashboard">
@@ -76,9 +81,13 @@ function UserDashboard() {
 
       {/* Footer Section */}
       <footer className="dashboard-footer">
-        <Button variant="primary">Send Feedback</Button>
-        <Button variant="secondary">Customer Care</Button>
+        <Button variant="primary" onClick={() => setShowFeedback(true)}>Send Feedback</Button>
+        <Button variant="secondary" onClick={() => setShowCustomerCare(true)}>Customer Care</Button>
       </footer>
+
+      {/* Modals */}
+      <FeedbackModal show={showFeedback} handleClose={() => setShowFeedback(false)} />
+      <CustomerCareModal show={showCustomerCare} handleClose={() => setShowCustomerCare(false)} />
     </Container>
   );
 }
