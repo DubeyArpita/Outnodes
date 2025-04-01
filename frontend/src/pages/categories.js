@@ -11,7 +11,7 @@ const categories = [
   {
     name: "Monuments & Nature",
     description: "Explore peaceful parks and green spaces.",
-    route: "/monuments-nature", // Route for Monuments & Nature
+    route: "/Monuments&Nature", // Route for Monuments & Nature
   },
   {
     name: "Clubs & Nightlife",

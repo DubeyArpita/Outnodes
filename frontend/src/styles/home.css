@@ -27,8 +27,8 @@
     z-index: 1;
     color: blue; /* Changed text color to blue */
     text-align: center;
-    background: white; /* Changed from transparent black to white */
-    padding: 10px;
+    background: white; 
+    padding: 25px 10px 10px 10px;
     border-radius: 10px;
     max-width: 80%;
   }
@@ -77,15 +77,49 @@
     margin-top: 10px;
   }
   
-  .btn-lg {
+  .btn{
+    display: inline-block;
+    visibility: visible;
+    opacity: 1 !important;
     margin: 10px;
     padding: 15px 30px;
     font-size: 1.2rem;
     border-radius: 30px;
+    border: 2px solid #007bff; /* Add a visible border */
+    background-color: #007bff; /* Set default background */
+    color: black; /* Ensure text is visible */
     transition: all 0.3s ease;
   }
+
+  .btn-primary {
+    background-color: #007bff !important;  /* Blue background */
+    color: white !important;
+    border: 2px solid #007bff !important;
+  }
   
-  .btn-lg:hover {
-    transform: scale(1.05);
+  .btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+  }
+  
+  .btn-outline-primary {
+    background-color: rgba(0, 123, 255, 0.2) !important; /* Light blue tint */
+    color: #007bff !important;
+    border: 2px solid #007bff !important;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff !important;
+    color: white !important;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin:10px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  /* Visibility boost */
   }
   

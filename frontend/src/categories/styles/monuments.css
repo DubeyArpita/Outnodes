@@ -1,0 +1,157 @@
+/* Food Outlets Page */
+.food-outlets-container {
+    position: relative;
+    width: 80%; /* Keeps it centered and well-sized */
+    max-width: 1200px;
+    margin: 30px auto ;
+    padding: 20px;
+    background: white; /* White box */
+    border-radius: 15px; /* Rounded edges */
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  /* Search Bar */
+  .search-bar {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Sorting & Filters */
+  .sort-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .sorting-options,
+  .filters {
+    display: flex;
+    gap: 15px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 40px;
+  }
+  button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Outlets Grid */
+  .outlets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  /* Outlet Card */
+  .outlet-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .outlet-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .outlet-thumbnail {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .outlet-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .outlet-rating {
+    color: #f4b400;
+    font-size: 1rem;
+  }
+  
+  .outlet-location {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  
+  
+  .outlet-details img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .outlet-details h2 {
+    color: #007bff;
+  }
+  
+  .outlet-details .info {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  /* Close Button */
+  .close-btn {
+    background: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .close-btn:hover {
+    background: darkred;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sort-filter-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .outlet-list {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  
+  .outlet-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Dynamic grid */
+    gap: 20px;
+    padding: 20px;
+    justify-content: center; /* Ensures the cards are evenly spaced */
+  }
+  

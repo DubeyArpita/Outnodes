@@ -3,7 +3,7 @@
   position: relative;
   width: 80%; /* Keeps it centered and well-sized */
   max-width: 1200px;
-  margin: auto;
+  margin: 30px auto ;
   padding: 20px;
   background: white; /* White box */
   border-radius: 15px; /* Rounded edges */
@@ -33,7 +33,13 @@
   display: flex;
   gap: 15px;
 }
-
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 40px;
+}
 button {
   padding: 8px 15px;
   border: none;
@@ -95,20 +101,7 @@ button:hover {
   color: #666;
 }
 
-/* Detailed View (Popup/Modal) */
-.outlet-details {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  width: 80%;
-  max-width: 600px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  z-index: 1000;
-}
+
 
 .outlet-details img {
   width: 100%;
