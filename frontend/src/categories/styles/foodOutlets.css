@@ -84,24 +84,56 @@ button:hover {
   border-radius: 8px;
   object-fit: cover;
 }
-
+.outlet-header{
+  display: flex;
+  justify-content: space-between;
+  max-height: 30px;
+  margin-bottom: 2px;
+}
 .outlet-name {
-  font-size: 1.2rem;
+  display:flex;
+  font-size: 2rem;
   font-weight: bold;
-  margin-top: 10px;
+  align-items: center;
 }
 
 .outlet-rating {
-  color: #f4b400;
+  align-items: center;
+  display: flex;
+  color: white;
   font-size: 1rem;
+  padding: 1rem 0;
+  
 }
 
+.outlet-rating-box{
+  display:flex;
+  align-items: center;
+  color: white;
+  background-color: #f4b400;
+  border-radius: 0.6rem;
+  width: 50px;
+}
+
+#name{
+  color: black;
+  font-size: 1.65rem;
+  margin-bottom: 10px;
+}
+
+.outlet-rating-content{
+  color: white;
+  font-weight: bold;
+}
+
+.outlet-cuisine{
+  color: #444;
+  font-size: large;
+}
 .outlet-location {
   font-size: 0.9rem;
   color: #666;
 }
-
-
 
 .outlet-details img {
   width: 100%;
@@ -153,4 +185,8 @@ button:hover {
   gap: 20px;
   padding: 20px;
   justify-content: center; /* Ensures the cards are evenly spaced */
+}
+
+p{
+  margin-bottom: 0px;
 }

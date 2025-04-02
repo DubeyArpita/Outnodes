@@ -40,7 +40,7 @@ function FoodOutlets() {
         className="search-bar"
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
-      <div className="outlets-list">
+      <div className="outlets-grid">
         {foodOutlets
           .filter((outlet) =>
             outlet.name.toLowerCase().includes(search) ||
@@ -51,14 +51,29 @@ function FoodOutlets() {
             <div key={index} className="outlet-card">
               <img src={outlet.thumbnail} alt={outlet.name} className="outlet-thumbnail" />
               <div className="outlet-details">
-                <h3>{outlet.name}</h3>
-                <p><strong>Rating:</strong> {outlet.rating} ⭐</p>
-                <p><strong>Location:</strong> {outlet.location}</p>
-                <p><strong>Cuisine:</strong> {outlet.cuisine}</p>
-                <p><strong>Timings:</strong> {outlet.timings}</p>
-                <p><strong>Contact:</strong> {outlet.contact}</p>
-                <a href={outlet.menu} target="_blank" rel="noopener noreferrer" className="menu-link">View Menu</a>
-                <p><strong>Reviews:</strong> {outlet.reviews.join(" | ")}</p>
+                <div className="outlet-header">
+                  <div className="outlet-name">
+                    <h2 id="name">{outlet.name}</h2> 
+                  </div>
+                  <div className="outlet-rating">
+                    <div className="outlet-rating-box">
+                      <div className="outlet-rating-content">
+                        ⭐{outlet.rating}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="outlet-header">
+                  <div className="outlet-cuisine">
+                    {outlet.cuisine}
+                  </div>
+                </div>
+                <div className="outlet-header">
+                  <div className="outlet-location">
+                    {outlet.location}
+                  </div>
+                </div>
+                {/* <a href={outlet.menu} target="_blank" rel="noopener noreferrer" className="menu-link">View Menu</a> */}
               </div>
             </div>
           ))}
