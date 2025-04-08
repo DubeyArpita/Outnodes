@@ -15,7 +15,7 @@ const monuments = [
     name: "Qutub Minar",
     location: "Delhi",
     pricing: "₹₹₹",
-    thumbnail: "/assets/sushicentral.jpg",
+    thumbnail: "/assets/spicehub.jpg",
     timings: "12 PM - 11 PM",
     contact: "+91 99887 65432",
     reviews: ["Best sushi in town!", "A must-visit for Japanese food lovers."]

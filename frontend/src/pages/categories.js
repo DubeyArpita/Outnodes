@@ -16,12 +16,12 @@ const categories = [
   {
     name: "Clubs & Nightlife",
     description: "Discover exciting nightlife and party places.",
-    route: "/clubs-nightlife", // Route for Clubs & Nightlife
+    route: "/ClubsNightlife", // Route for Clubs & Nightlife
   },
   {
     name: "Gaming & Entertainment",
     description: "Find gaming zones, arcades, and fun spots.",
-    route: "/gaming-entertainment", // Route for Gaming & Entertainment
+    route: "/GamingEntertainment", // Route for Gaming & Entertainment
   },
 ];
 

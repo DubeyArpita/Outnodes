@@ -11,6 +11,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Signup from "./pages/signup";
 import FoodOutlet from "./categories/pages/FoodOutlets";
 import Monuments from "./categories/pages/Monuments&Nature";
+import ClubsNightlife from "./categories/pages/ClubsNightlife";
+import GamingEntertainment from "./categories/pages/GamingEntertainment";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="/user" element={<UserDashboard />} />
           <Route path="/FoodOutlets" element={<FoodOutlet />} />
           <Route path="/Monuments&Nature" element={<Monuments />} />
+          <Route path="/ClubsNightlife" element={<ClubsNightlife />} />
+          <Route path="/GamingEntertainment" element={<GamingEntertainment />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={["owner"]} />}>
