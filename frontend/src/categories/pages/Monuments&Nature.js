@@ -4,18 +4,25 @@ import "../styles/monuments.css";
 const monuments = [
   {
     name: "India Gate",
-    rating: 4.5,
     location: "New Delhi",
     pricing: "₹₹",
-    thumbnail: "/assets/spicehub.jpg",
+    thumbnail: "/assets/india gate.jpeg",
     timings: "10 AM - 11 PM",
     contact: "+91 98765 43210",
     reviews: ["Great food!", "Awesome ambiance."]
   },
   {
     name: "Qutub Minar",
-    rating: 4.7,
-    location: "Cyber Hub, Gurgaon",
+    location: "Delhi",
+    pricing: "₹₹₹",
+    thumbnail: "/assets/sushicentral.jpg",
+    timings: "12 PM - 11 PM",
+    contact: "+91 99887 65432",
+    reviews: ["Best sushi in town!", "A must-visit for Japanese food lovers."]
+  },
+  {
+    name: "Lotus Temple",
+    location: "Delhi",
     pricing: "₹₹₹",
     thumbnail: "/assets/sushicentral.jpg",
     timings: "12 PM - 11 PM",
@@ -24,40 +31,124 @@ const monuments = [
   }
 ];
 
+const green = [
+  {
+    name: "Lodhi Garden",
+    location: "New Delhi",
+    pricing: "₹₹",
+    thumbnail: "/assets/india gate.jpeg",
+    timings: "10 AM - 11 PM",
+    contact: "+91 98765 43210",
+    reviews: ["Great food!", "Awesome ambiance."]
+  },
+  {
+    name: "Sanjay Van",
+    location: "Hauz Khas, Delhi",
+    pricing: "₹₹₹",
+    thumbnail: "/assets/sushicentral.jpg",
+    timings: "12 PM - 11 PM",
+    contact: "+91 99887 65432",
+    reviews: ["Best sushi in town!", "A must-visit for Japanese food lovers."]
+  },
+  {
+    name: "Central Park",
+    location: "Connaught Place, Delhi",
+    pricing: "₹₹₹",
+    thumbnail: "/assets/sushicentral.jpg",
+    timings: "12 PM - 11 PM",
+    contact: "+91 99887 65432",
+    reviews: ["Best sushi in town!", "A must-visit for Japanese food lovers."]
+  }
+];
+
+
 function Monuments() {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="food-outlets-container">
-      <h1 className="section-title">Monuments</h1>
+    <div className="page">
+      <div className="monument-container">
+      <h1 className="section-title">Monuments & Heritage</h1>
       <input
         type="text"
-        placeholder="Search by name, location, or cuisine..."
+        placeholder="Search by name or location..."
         className="search-bar"
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
-      <div className="outlets-list">
+      <div className="monuments-grid">
         {monuments
-          .filter((monuments) =>
-            monuments.name.toLowerCase().includes(search) ||
-            monuments.location.toLowerCase().includes(search) ||
-            monuments.cuisine.toLowerCase().includes(search)
+          .filter((monument) =>
+            monument.name.toLowerCase().includes(search) ||
+            monument.location.toLowerCase().includes(search) ||
+            monument.cuisine.toLowerCase().includes(search)
           )
-          .map((monuments, index) => (
-            <div key={index} className="outlet-card">
-              <img src={monuments.thumbnail} alt={monuments.name} className="outlet-thumbnail" />
-              <div className="outlet-details">
-                <h3>{monuments.name}</h3>
-                <p><strong>Rating:</strong> {monuments.rating} ⭐</p>
-                <p><strong>Location:</strong> {monuments.location}</p>
-                <p><strong>Timings:</strong> {monuments.timings}</p>
-                <p><strong>Contact:</strong> {monuments.contact}</p>
-                <p><strong>Reviews:</strong> {monuments.reviews.join(" | ")}</p>
+          .map((monument, index) => (
+            <div key={index} className="monument-card">
+              <img src={monument.thumbnail} alt={monument.name} className="monument-thumbnail" />
+              <div className="monument-details">
+                <div className="monument-header">
+                  <div className="monument-name">
+                    <h2 id="name">{monument.name}</h2> 
+                  </div>
+                </div>
+                <div className="monument-header">
+                  <div className="monument-cuisine">
+                    {monument.cuisine}
+                  </div>
+                </div>
+                <div className="monument-header">
+                  <div className="monument-location">
+                    {monument.location}
+                  </div>
+                </div>
+                {/* <a href={monument.menu} target="_blank" rel="noopener noreferrer" className="menu-link">View Menu</a> */}
               </div>
             </div>
           ))}
       </div>
+      </div>
+      <div className="monument-container">
+      <h1 className="section-title">Green Spaces</h1>
+      <input
+        type="text"
+        placeholder="Search by name or location..."
+        className="search-bar"
+        onChange={(e) => setSearch(e.target.value.toLowerCase())}
+      />
+      <div className="monuments-grid">
+        {green
+          .filter((monument) =>
+            monument.name.toLowerCase().includes(search) ||
+            monument.location.toLowerCase().includes(search) ||
+            monument.cuisine.toLowerCase().includes(search)
+          )
+          .map((monument, index) => (
+            <div key={index} className="monument-card">
+              <img src={monument.thumbnail} alt={monument.name} className="monument-thumbnail" />
+              <div className="monument-details">
+                <div className="monument-header">
+                  <div className="monument-name">
+                    <h2 id="name">{monument.name}</h2> 
+                  </div>
+                </div>
+                <div className="monument-header">
+                  <div className="monument-cuisine">
+                    {monument.cuisine}
+                  </div>
+                </div>
+                <div className="monument-header">
+                  <div className="monument-location">
+                    {monument.location}
+                  </div>
+                </div>
+                {/* <a href={monument.menu} target="_blank" rel="noopener noreferrer" className="menu-link">View Menu</a> */}
+              </div>
+            </div>
+          ))}
+      </div>
+      </div>
     </div>
+    
   );
 }
 

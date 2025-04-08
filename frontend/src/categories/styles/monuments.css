@@ -1,5 +1,5 @@
-/* Food Outlets Page */
-.food-outlets-container {
+/* Food monuments Page */
+.monument-container {
     position: relative;
     width: 80%; /* Keeps it centered and well-sized */
     max-width: 1200px;
@@ -54,15 +54,15 @@
     background-color: #0056b3;
   }
   
-  /* Outlets Grid */
-  .outlets-grid {
+  /* monuments Grid */
+  .monuments-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
   }
-  /* Outlet Card */
-  .outlet-card {
+  /* monument Card */
+  .monument-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -74,46 +74,41 @@
     flex-direction: column;
     height: 100%;
   }
-  .outlet-card:hover {
+  .monument-card:hover {
     transform: scale(1.05);
   }
   
-  .outlet-thumbnail {
+  .monument-thumbnail {
     width: 100%;
     height: 150px;
     border-radius: 8px;
     object-fit: cover;
   }
   
-  .outlet-name {
+  .monument-name {
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 10px;
   }
   
-  .outlet-rating {
-    color: #f4b400;
-    font-size: 1rem;
-  }
-  
-  .outlet-location {
+  .monument-location {
     font-size: 0.9rem;
     color: #666;
   }
   
   
   
-  .outlet-details img {
+  .monument-details img {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 15px;
   }
   
-  .outlet-details h2 {
+  .monument-details h2 {
     color: #007bff;
   }
   
-  .outlet-details .info {
+  .monument-details .info {
     margin-top: 10px;
     font-size: 1rem;
     color: #444;
@@ -142,12 +137,12 @@
       align-items: flex-start;
     }
   
-    .outlet-list {
+    .monument-list {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
   }
   
-  .outlet-list {
+  .monument-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Dynamic grid */
     gap: 20px;
