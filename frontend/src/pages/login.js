@@ -23,7 +23,7 @@ function Login() {
       alert(`Login successful as ${user.role}!`);
 
       if (user.role === "node") {
-        navigate("/node-dashboard");
+        navigate("/user");
       } else if (user.role === "owner") {
         navigate("/owner");
       } else if (user.role === "admin") {

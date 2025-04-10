@@ -14,6 +14,21 @@ const dummyReviewedPlaces = [
   { name: "Green Valley", review: "A peaceful place to relax.", category: "Park", location: "Countryside", image: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" },
 ];
 
+const dummyVisitedPlaces = [
+  {
+    name: "Ocean View Mall",
+    category: "Entertainment",
+    location: "Seaside",
+    image: "https://source.unsplash.com/400x300/?mall"
+  },
+  {
+    name: "Heritage Temple",
+    category: "Monument",
+    location: "Old Town",
+    image: "https://source.unsplash.com/400x300/?temple"
+  }
+];
+
 function UserDashboard() {
   const userProfile = {
     profilePic: "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
@@ -78,6 +93,27 @@ function UserDashboard() {
           ))}
         </ul>
       </div>
+      
+      {/* Previously Visited Places Section */}
+<div className="favorited-places mt-4">
+  <h3 className="mb-3">Previously Visited Places</h3>
+  <Row>
+    {dummyVisitedPlaces.map((place, index) => (
+      <Col md={6} key={index} className="mb-4">
+        <Card>
+          <Card.Img variant="top" src={place.image} />
+          <Card.Body>
+            <Card.Title>{place.name}</Card.Title>
+            <Card.Text><b>Category:</b> {place.category}</Card.Text>
+            <Card.Text><b>Location:</b> {place.location}</Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
+    ))}
+  </Row>
+</div>
+
+
 
       {/* Footer Section */}
       <footer className="dashboard-footer">
