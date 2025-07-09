@@ -60,7 +60,8 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Choose Your{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              Adventure <br />For Explorers
+              Adventure <br />
+              For Explorers
             </span>
           </h2>
           <p className="mt-3 text-gray-700 max-w-2xl mx-auto font-medium">
@@ -74,28 +75,28 @@ export default function Home() {
             {[
               {
                 title: "Food Outlets",
-                image: "/food-outlets.jpg",
+                image: "/food.jpg",
                 description:
                   "Savor top-rated cafes, restaurants, and street eats.",
                 link: "/discover/food",
               },
               {
                 title: "Monuments & Nature",
-                image: "/monuments-nature.jpg",
+                image: "/monuments.jpg",
                 description:
                   "Find peace in nature or explore historic landmarks.",
                 link: "/discover/nature",
               },
               {
                 title: "Clubs & Nightlife",
-                image: "/clubs-nightlife.jpg",
+                image: "/club.jpg",
                 description:
                   "Experience vibrant nightlife and late-night hangouts.",
                 link: "/discover/nightlife",
               },
               {
                 title: "Gaming & Entertainment",
-                image: "/gaming-entertainment.jpg",
+                image: "/entertainment.jpg",
                 description:
                   "Unwind with arcades, gaming zones, and fun spaces.",
                 link: "/discover/gaming",
