@@ -12,6 +12,13 @@ connectDB();
 
 const app = express();
 
+app.use(
+  cors({
+    origin: ["https://outnodes.vercel.app"], // ✅ Allow your frontend domain
+    credentials: true, // if you're sending cookies or authorization headers
+  })
+);
+
 // Middlewares
 app.use(cors());
 app.use(express.json()); // to parse JSON bodies
