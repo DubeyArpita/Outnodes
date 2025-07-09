@@ -12,7 +12,7 @@ const ThemePage = ({ theme }) => {
         console.log("🔍 Fetching places for theme:", theme);
 
         const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/places?category=${theme}`
+          `${import.meta.env.VITE_BACKEND_URL}api/places?category=${theme}`
         );
         console.log("📡 Fetch response:", res);
         if (!res.ok) throw new Error("Failed to fetch places");

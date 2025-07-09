@@ -53,18 +53,15 @@ export default function SubmitPlace() {
       console.log("🧪 Token before submit:", token);
       console.log("🔑 Auth Header:", `Bearer ${token}`);
 
-      const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/places`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/places`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
 
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
 
       const result = await res.json();
 

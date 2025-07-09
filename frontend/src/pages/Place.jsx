@@ -11,7 +11,7 @@ export default function PlacePage() {
     const fetchPlace = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/places/${id}`,
+          `${import.meta.env.VITE_BACKEND_URL}api/places/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

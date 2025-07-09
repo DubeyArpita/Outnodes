@@ -17,11 +17,14 @@ const AllPlacesAdmin = () => {
 
     const fetchPlaces = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/places/admin/all`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}api/places/admin/all`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         //if (!res.ok) throw new Error("Failed to fetch places");
         const data = await res.json();
         console.log("📦 Fetched places:", data.places);
@@ -43,12 +46,15 @@ const AllPlacesAdmin = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/places/${placeId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}api/places/${placeId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       console.log("🔍 Deleting place with ID:", placeId);
 

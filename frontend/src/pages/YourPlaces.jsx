@@ -12,7 +12,7 @@ const YourPlaces = () => {
     const fetchPlaces = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/places/mine`,
+          `${import.meta.env.VITE_BACKEND_URL}api/places/mine`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ const YourPlaces = () => {
   const handleDelete = async (id) => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/places/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}api/places/${id}`,
         {
           method: "DELETE",
           headers: {

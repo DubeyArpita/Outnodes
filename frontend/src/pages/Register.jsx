@@ -75,7 +75,7 @@ export default function Signup() {
 
       // 4️⃣ Send to backend
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`,
+        `${import.meta.env.VITE_BACKEND_URL}api/auth/register`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
