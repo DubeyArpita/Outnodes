@@ -14,13 +14,14 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://outnodes.vercel.app"], // ✅ Allow your frontend domain
-    credentials: true, // if you're sending cookies or authorization headers
+    origin: "https://outnodes.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
 // Middlewares
-app.use(cors());
+//app.use(cors());
 app.use(express.json()); // to parse JSON bodies
 
 // Optional: serve static assets (like uploaded files if you store them locally)
