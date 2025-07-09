@@ -15,22 +15,24 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: data.username, // assuming your backend uses "email"
-          password: data.password,
-          isLoggedIn: true, // optional, depending on your backend
-        }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: data.username, // assuming your backend uses "email"
+            password: data.password,
+            isLoggedIn: true, // optional, depending on your backend
+          }),
+        }
+      );
 
       const result = await res.json();
 
       if (res.ok && result.user) {
         console.log("✅ Login success:", result);
-        
+
         dispatch(
           loginUser({
             role: result.user.role,
@@ -52,21 +54,18 @@ export default function Login() {
         );
 
         console.log("🔐 User logged in:", result.user.role);
-        
+
         if (result.user.role === "explorer") {
           setTimeout(() => navigate("/discover"), 0);
         } else if (result.user.role === "business") {
           setTimeout(() => navigate("/dashboard"), 0);
-        }else if( result.user.role === "admin") {
-           setTimeout(() => navigate("/all-places-admin"), 0);
-
-        }else{
+        } else if (result.user.role === "admin") {
+          setTimeout(() => navigate("/all-places-admin"), 0);
+        } else {
           console.error("❌ Unknown role:", result.user.role);
-          
         }
       } else {
         console.error("❌ Login failed:", result.msg || "Invalid credentials");
-        
       }
     } catch (err) {
       console.error("🔥 Login error:", err.message);

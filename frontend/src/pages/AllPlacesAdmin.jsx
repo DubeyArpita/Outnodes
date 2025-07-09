@@ -17,7 +17,7 @@ const AllPlacesAdmin = () => {
 
     const fetchPlaces = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/places/admin/all", {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/places/admin/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +43,7 @@ const AllPlacesAdmin = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/places/${placeId}`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/places/${placeId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

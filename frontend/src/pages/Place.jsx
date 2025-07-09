@@ -7,17 +7,18 @@ export default function PlacePage() {
   const [place, setPlace] = useState(null);
   const [error, setError] = useState(null);
   const token = useSelector((state) => state.user.token);
-    useEffect(() => {
+  useEffect(() => {
     const fetchPlace = async () => {
-
       try {
-
-        const res = await fetch(`http://localhost:5000/api/places/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/places/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!res.ok) {
           const errorText = await res.text(); // Try to read the full error message
