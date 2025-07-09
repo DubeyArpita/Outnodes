@@ -20,7 +20,8 @@ export default function SubmitPlace() {
       for (let file of imageFiles) {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("upload_preset", "unsigned_preset");
+        formData.append("upload_preset", "outnodes_preset");
+        formData.append("cloud_name", "dho2su984");
 
         const res = await fetch(
           "https://api.cloudinary.com/v1_1/dho2su984/image/upload",

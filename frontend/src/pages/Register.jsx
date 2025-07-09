@@ -24,7 +24,8 @@ export default function Signup() {
       if (userType === "explorer" && data.profilePic?.[0]) {
         const formData = new FormData();
         formData.append("file", data.profilePic[0]);
-        formData.append("upload_preset", "unsigned_preset"); // replace!
+        formData.append("upload_preset", "outnodes_preset");
+        formData.append("cloud_name", "dho2su984");
 
         const cloudRes = await fetch(
           "https://api.cloudinary.com/v1_1/dho2su984/image/upload", // replace!
@@ -41,7 +42,8 @@ export default function Signup() {
       if (userType === "business" && data.idCard?.[0]) {
         const formData = new FormData();
         formData.append("file", data.idCard[0]);
-        formData.append("upload_preset", "unsigned_preset"); // replace!
+        formData.append("upload_preset", "outnodes_preset");
+        formData.append("cloud_name", "dho2su984");
 
         const cloudRes = await fetch(
           "https://api.cloudinary.com/v1_1/dho2su984/image/upload", // replace!
