@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,9 @@ import { loginUser } from "../store/userSlice";
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loginError, setLoginError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -14,6 +17,8 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true); // ⏳ Start loader
+    setLoginError("");
     try {
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}api/auth/login`,
@@ -31,8 +36,6 @@ export default function Login() {
       const result = await res.json();
 
       if (res.ok && result.user) {
-        console.log("✅ Login success:", result);
-
         dispatch(
           loginUser({
             role: result.user.role,
@@ -53,22 +56,20 @@ export default function Login() {
           })
         );
 
-        console.log("🔐 User logged in:", result.user.role);
-
         if (result.user.role === "explorer") {
           setTimeout(() => navigate("/discover"), 0);
         } else if (result.user.role === "business") {
           setTimeout(() => navigate("/dashboard"), 0);
         } else if (result.user.role === "admin") {
           setTimeout(() => navigate("/all-places-admin"), 0);
-        } else {
-          console.error("❌ Unknown role:", result.user.role);
         }
       } else {
-        console.error("❌ Login failed:", result.msg || "Invalid credentials");
+        setLoginError(result.msg || "Invalid credentials");
       }
     } catch (err) {
-      console.error("🔥 Login error:", err.message);
+      setLoginError("Login failed — please try again later.");
+    } finally {
+      setLoading(false); // ✅ End loader
     }
   };
 
@@ -95,7 +96,6 @@ export default function Login() {
               </p>
             )}
           </div>
-
           {/* Password */}
           <div>
             <label className="block mb-1 font-medium">Password</label>
@@ -111,14 +111,58 @@ export default function Login() {
               </p>
             )}
           </div>
+          {loginError && (
+            <p className="text-sm text-red-600 bg-red-100 py-2 px-3 rounded-md">
+              {loginError}
+            </p>
+          )}
 
-          {/* Submit */}
+          {/* Loader + Submit */}
+          <button
+            type="submit"
+            className={`w-full py-2 rounded-md font-medium transition ${
+              loading
+                ? "bg-blue-300 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="flex justify-center items-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8H4z"
+                  />
+                </svg>
+                Logging in...
+              </span>
+            ) : (
+              "Login"
+            )}
+          </button>
+
+          {/* Submit
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md font-medium transition"
           >
             Login
-          </button>
+          </button> */}
         </form>
       </div>
     </section>

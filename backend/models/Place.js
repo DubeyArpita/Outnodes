@@ -8,6 +8,9 @@ const placeSchema = new mongoose.Schema({
     type: [String],
     default: [],
   },
+  placesPosted: { type: Number, default: 0 }, // 📍 how many places this business has posted
+  viewsThisMonth: { type: Number, default: 0 }, // 👀 how many times this place was viewed
+  rating: { type: Number, default: 0 }, // ⭐ average rating (optional if reviews already exist)
   // Cloudinary URLs
   location: {
     city: String,

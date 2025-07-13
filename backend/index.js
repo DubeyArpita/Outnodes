@@ -6,7 +6,7 @@ const connectDB = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
 const path = require("path");
 const placeRoutes = require("./routes/placeRoutes");
-
+const businessRoutes = require("./routes/businessRoutes");
 // Connect to DB
 connectDB();
 
@@ -14,7 +14,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://outnodes.vercel.app",
+    origin: [
+      "http://localhost:5173", // ✅ local frontend dev
+      "https://outnodes.vercel.app", // ✅ deployed frontend
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -30,6 +33,7 @@ app.use(express.json()); // to parse JSON bodies
 app.use("/api/auth", authRoutes);
 app.use("/api/places", placeRoutes);
 app.use("/api/places/admin/all", placeRoutes); // Admin routes can be under the same or a different path
+app.use("/api/business", businessRoutes);
 
 app.get("/", (req, res) => {
   res.send("🚀 Backend is running");

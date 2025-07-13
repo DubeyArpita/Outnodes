@@ -36,7 +36,7 @@ router.post("/", authMiddleware, async (req, res) => {
         .json({ msg: "Only business owners can add places." });
     }
 
-    const { name, description, location, photo, category } = req.body;
+    const { name, description, location, images, category } = req.body;
 
     // Validate required fields
     if (!name || !description || !location || !category) {
@@ -64,7 +64,7 @@ router.post("/", authMiddleware, async (req, res) => {
       name,
       description,
       location,
-      photo,
+      images,
       category, // ✅ consistent with schema
       addedBy: business._id,
     });
@@ -114,13 +114,15 @@ router.get("/mine", authMiddleware, async (req, res) => {
 // 🔶 Route 3: Get a Place by ID (GET /api/places/:id)
 //
 router.get("/:id", authMiddleware, async (req, res) => {
-  console.log("🛬 Inside /api/places route");
-  console.log("🔍 Fetching place with ID:", req.params.id);
   try {
     const place = await Place.findById(req.params.id);
     if (!place) {
       return res.status(404).json({ msg: "Place not found" });
     }
+
+    place.viewsThisMonth = (place.viewsThisMonth || 0) + 1;
+    await place.save();
+
     res.status(200).json({ place });
   } catch (err) {
     res.status(500).json({ msg: "Error fetching place", error: err.message });

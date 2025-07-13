@@ -89,7 +89,7 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <AuthLayout authentication={true} role={["explorer", "business"]}>
+          <AuthLayout authentication={true} role={["explorer", "business","admin"]}>
             <Profile />
           </AuthLayout>
         ),
