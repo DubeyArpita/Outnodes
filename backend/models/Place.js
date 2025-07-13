@@ -4,7 +4,11 @@ const placeSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
   category: { type: String, required: true }, // e.g. cafe, adventure, stay, event
-  images: [String], // Cloudinary URLs
+  images: {
+    type: [String],
+    default: [],
+  },
+  // Cloudinary URLs
   location: {
     city: String,
     address: String,
@@ -28,15 +32,15 @@ const placeSchema = new mongoose.Schema({
     close: String, // e.g. "11:00 PM"
   },
   best_time: { type: String }, // e.g. "Evening", "Weekend"
-  amenities: {type: [String] }, // e.g. ["WiFi", "Parking", "AC"]
+  amenities: { type: [String] }, // e.g. ["WiFi", "Parking", "AC"]
   priceRange: { type: String }, // e.g. “₹₹”, “Affordable”, “Premium”
-  games: { type: String }, 
-  gamePricing: { type: String }, 
-  ageLimit: { type: String }, 
-  foodType: { type: String }, 
-  menu: { type: String }, 
-  entryPrice: { type: String }, 
-  otherInfo: { type: String }, 
+  games: { type: String },
+  gamePricing: { type: String },
+  ageLimit: { type: String },
+  foodType: { type: String },
+  menu: { type: String },
+  entryPrice: { type: String },
+  otherInfo: { type: String },
   featured: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],

@@ -35,13 +35,15 @@ export default function SubmitPlace() {
         uploadedImageUrls.push(result.secure_url);
       }
 
+      const { images: ignored, ...restData } = data;
+
       // Now combine everything into one payload:
       const payload = {
-        ...data,
+        ...restData,
         images: uploadedImageUrls,
+        category,
         location: {
-          address: data.location,
-          city: "Ghaziabad", // optional: make this user input later
+          address: data.location, 
         },
         contact: {
           phone: "Add optional phone field?",
