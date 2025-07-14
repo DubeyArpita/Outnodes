@@ -18,7 +18,7 @@ import PlacePage from "./pages/Place.jsx";
 import YourPlacesPage from "./pages/YourPlaces.jsx";
 import ThemePage from "./pages/ThemePage.jsx";
 import AllPlacesAdmin from "./pages/AllPlacesAdmin.jsx";
-
+import Pricing from "./pages/Pricing.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,19 +56,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/food",
-        element: <ThemePage theme="food" />,
+        element: <ThemePage theme="Food Outlet" />,
       },
       {
         path: "/monument-nature",
-        element: <ThemePage theme="monument-nature" />,
+        element: <ThemePage theme="Monuments & Nature" />,
       },
       {
         path: "/club-nightlife",
-        element: <ThemePage theme="club-nightlife" />,
+        element: <ThemePage theme="Club & Nightlife" />,
       },
       {
         path: "/gaming-entertainment",
-        element: <ThemePage theme="gaming-entertainment" />,
+        element: <ThemePage theme="Gaming & Entertainment" />,
       },
       {
         path: "/your-places",
@@ -87,9 +87,20 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/pricing",
+        element: (
+          <AuthLayout authentication={true} role="business">
+            <Pricing />
+          </AuthLayout>
+        ),
+      },
+      {
         path: "/profile",
         element: (
-          <AuthLayout authentication={true} role={["explorer", "business","admin"]}>
+          <AuthLayout
+            authentication={true}
+            role={["explorer", "business", "admin"]}
+          >
             <Profile />
           </AuthLayout>
         ),

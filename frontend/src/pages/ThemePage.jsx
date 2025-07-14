@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ThemePage = ({ theme }) => {
   const [places, setPlaces] = useState([]);
@@ -9,10 +11,12 @@ const ThemePage = ({ theme }) => {
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        console.log("🔍 Fetching places for theme:", theme);
+        //console.log("🔍 Fetching places for theme:", theme);
 
         const res = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}api/places?category=${theme}`
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }api/places?category=${encodeURIComponent(theme)}`
         );
         console.log("📡 Fetch response:", res);
         if (!res.ok) throw new Error("Failed to fetch places");
@@ -30,14 +34,14 @@ const ThemePage = ({ theme }) => {
     fetchPlaces();
   }, [theme]);
 
-  const formatTitle = (theme) => {
-    return theme.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  };
+  // const formatTitle = (theme) => {
+  //   return theme.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  // };
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
       <h2 className="text-3xl font-bold mb-8 text-center text-slate-800">
-        ✨ Discover: {formatTitle(theme)}
+        ✨ Discover: {theme}
       </h2>
 
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -52,16 +56,33 @@ const ThemePage = ({ theme }) => {
             <div
               key={place._id}
               className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer group"
-              onClick={() => navigate(`/places/${place._id}`)}
             >
-              <img
-                src={place.photo || "https://via.placeholder.com/300"}
-                alt={place.title}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform"
-              />
-              <div className="p-4">
+              <Carousel
+                showThumbs={false}
+                showStatus={false}
+                infiniteLoop
+                autoPlay
+                interval={3000}
+                className="h-48"
+                useKeyboardArrows
+              >
+                {place.images?.map((img, idx) => (
+                  <div key={idx}>
+                    <img
+                      src={img}
+                      alt={`Place ${idx}`}
+                      className="h-48 object-cover"
+                    />
+                  </div>
+                ))}
+              </Carousel>
+
+              <div
+                className="p-4 cursor-pointer"
+                onClick={() => navigate(`/places/${place._id}`)}
+              >
                 <h3 className="text-xl font-semibold text-indigo-700">
-                  {place.title}
+                  {place.name}
                 </h3>
                 <p className="text-gray-600 mt-1">
                   📍 {place.location?.city}, {place.location?.address}

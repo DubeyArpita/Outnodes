@@ -72,7 +72,7 @@ const YourPlaces = () => {
               onClick={() => navigate(`/places/${place._id}`)}
             >
               <h3 className="text-xl font-semibold text-slate-700 group-hover:text-indigo-600">
-                {place.title}
+                {place.name}
               </h3>
               <p className="text-gray-600 mt-2">{place.description}</p>
 

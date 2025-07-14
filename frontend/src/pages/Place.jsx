@@ -82,6 +82,22 @@ export default function PlacePage() {
           <p>{place.location?.address}</p>
         </div>
 
+        <div>
+          <strong>Rating:</strong>
+          <p>{place.rating}</p>
+        </div>
+
+        <div>
+          <strong>Reviews:</strong>
+          <ul className="list-disc pl-5 space-y-2">
+            {place.reviews.map((review, idx) => (
+              <li key={idx} className="text-gray-700">
+                <strong>{review.user}:</strong> {review.comment}
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* 💬 Category-specific Info */}
         {place.category === "Food Outlet" && (
           <div>
