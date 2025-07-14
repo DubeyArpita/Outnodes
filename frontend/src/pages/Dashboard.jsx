@@ -25,7 +25,7 @@ export default function Dashboard() {
 
         const result = await res.json();
         console.log("📦 Stats response:", result);
-
+        
         // 🔄 Update both name and stats
         setStats({
           name: result.name,

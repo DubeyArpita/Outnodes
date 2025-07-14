@@ -34,12 +34,18 @@ export default function Header() {
             <Button label="Favorites" to="/favorites" variant="ghost" />
           </>
         )}
-
         {isLoggedIn && role === "business" && (
           <>
             <Button label="Dashboard" to="/dashboard" variant="ghost" />
             <Button label="List a Place" to="/submit-place" variant="primary" />
             <Button label="Pricing & Plans" to="/pricing" variant="primary" />
+          </>
+        )}
+
+        {isLoggedIn && role === "admin" && (
+          <>
+            <Button label="All Places" to="/all-places-admin" variant="primary" />
+            <Button label="List a Place" to="/submit-place" variant="primary" />
           </>
         )}
 
@@ -49,7 +55,6 @@ export default function Header() {
             <Button label="Register" to="/register" variant="outline" />
           </>
         )}
-
         {isLoggedIn && (
           <div className="relative">
             <img

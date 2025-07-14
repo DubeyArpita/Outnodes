@@ -7,7 +7,6 @@ const AllPlacesAdmin = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { token, user } = useSelector((state) => state.user) || {};
-  //const { token, user } = useSelector((state) => state.auth); // adjust path if needed
 
   useEffect(() => {
     if (!user || user.role !== "admin") {
@@ -22,14 +21,13 @@ const AllPlacesAdmin = () => {
           {
             headers: {
               Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             },
           }
         );
-        //if (!res.ok) throw new Error("Failed to fetch places");
+
         const data = await res.json();
-        console.log("📦 Fetched places:", data.places);
-        console.log("🔑 User token:", data);
-        setPlaces(data.places);
+        setPlaces(Array.isArray(data.places) ? data.places : []);
       } catch (err) {
         console.error("❌ Fetch error:", err.message);
         setError("Could not load places.");
@@ -56,8 +54,6 @@ const AllPlacesAdmin = () => {
         }
       );
 
-      console.log("🔍 Deleting place with ID:", placeId);
-
       if (!res.ok) throw new Error("Failed to delete");
       setPlaces((prev) => prev.filter((p) => p._id !== placeId));
     } catch (err) {
@@ -82,24 +78,30 @@ const AllPlacesAdmin = () => {
             <div
               key={place._id}
               className="bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-lg"
+              onClick={() => navigate(`/places/${place._id}`)}
             >
               <img
-                src={place.images[0] || "https://via.placeholder.com/300"}
-                alt={place.title}
+                src={
+                  Array.isArray(place.images) && place.images.length > 0
+                    ? place.images[0]
+                    : "https://via.placeholder.com/300"
+                }
+                alt={place.title || "Place image"}
                 className="w-full h-48 object-cover"
               />
+
               <div className="p-4">
                 <h2 className="text-xl font-semibold text-indigo-700">
-                  {place.name}
+                  {place.name || "Untitled"}
                 </h2>
                 <p className="text-sm text-gray-600 mt-1">
-                  📍 {place.location?.city}, {place.location?.address}
+                  📍 {place.location?.address || "Unknown Address"}
                 </p>
                 <p className="text-sm text-gray-600 mt-1">
-                  🏷️ {place.category}
+                  🏷️ {place.category || "No category"}
                 </p>
                 <p className="text-sm text-gray-600 mt-1">
-                  👤 Added by: {place.addedBy}
+                  👤 Added by: {place.addedBy || "Unknown"}
                 </p>
 
                 <button

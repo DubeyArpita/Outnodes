@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Place = require("../models/Place");
+const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
   const authHeader = req.header("Authorization");
   if (!authHeader) return res.status(401).json({ msg: "No token provided" });
 
   const token = authHeader.split(" ")[1];
+
   if (!token) return res.status(401).json({ msg: "Malformed token" });
 
   try {
@@ -16,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
       process.env.JWT_SECRET || "yourSecretKey"
     );
 
-    const user = await User.findById(decoded.id); // 🧠 Fetch full user
+    const user = await User.findById(decoded.id);
     if (!user) return res.status(401).json({ msg: "User not found" });
 
     req.user = user; // ✅ Attach full user

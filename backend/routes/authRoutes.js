@@ -14,12 +14,6 @@ router.post("/register", async (req, res) => {
     const newUser = new User(req.body);
     await newUser.save();
 
-    console.log("🎯 About to sign JWT with:", {
-      id: newUser._id,
-      role: newUser.role,
-      secret: process.env.JWT_SECRET || "yourSecretKey",
-    });
-
     const token = jwt.sign(
       { id: newUser._id, role: newUser.role },
       process.env.JWT_SECRET || "yourSecretKey",

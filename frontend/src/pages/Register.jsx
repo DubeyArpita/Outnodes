@@ -88,9 +88,6 @@ export default function Signup() {
       const result = await res.json();
 
       if (res.ok) {
-        console.log("✅ Registered:", result);
-        console.log("🔑 Token:", result.token);
-        console.log("👤 User Info:", result.user);
         dispatch(
           loginUser({
             role: result.user.role,
@@ -111,9 +108,9 @@ export default function Signup() {
           })
         );
         if (result.user.role === "explorer") {
-          navigate("/discover");
+          setTimeout(() => navigate("/discover"), 0);
         } else {
-          navigate("/dashboard");
+          setTimeout(() => navigate("/dashboard"), 0);
         }
         // Optional: show success toast or redirect
       } else {

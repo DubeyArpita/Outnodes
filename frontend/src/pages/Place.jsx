@@ -27,6 +27,8 @@ export default function PlacePage() {
 
         const data = await res.json();
         setPlace(data.place);
+        console.log("Place data:", data.place);
+        console.log(data.place.category);
       } catch (err) {
         console.error("❌ Failed to fetch place:", err.message);
         setError("Couldn't load place.");
@@ -67,10 +69,10 @@ export default function PlacePage() {
         {/* 🕒 Timings & Pricing */}
         <div className="grid sm:grid-cols-2 gap-4 text-sm">
           <div>
-            <strong>Pricing:</strong> {place.pricing || "N/A"}
+            <strong>Pricing:</strong> {place.priceRange || "N/A"}
           </div>
           <div>
-            <strong>Timings:</strong> {place.timings || "N/A"}
+            <strong>Timings:</strong> {place.timing || "N/A"}
           </div>
         </div>
 
@@ -81,7 +83,7 @@ export default function PlacePage() {
         </div>
 
         {/* 💬 Category-specific Info */}
-        {place.foodType && (
+        {place.category === "Food Outlet" && (
           <div>
             <strong>Food Type:</strong> {place.foodType}
             <p>
@@ -93,7 +95,7 @@ export default function PlacePage() {
           </div>
         )}
 
-        {place.entryPrice && (
+        {place.category == "Club & Nightlife" && (
           <div>
             <strong>Club Entry:</strong> {place.entryPrice}
             <p>
@@ -102,7 +104,7 @@ export default function PlacePage() {
           </div>
         )}
 
-        {place.games && (
+        {place.category === "Gaming & Entertainment" && (
           <div>
             <strong>Games Available:</strong> {place.games}
             <p>
@@ -110,6 +112,19 @@ export default function PlacePage() {
             </p>
             <p>
               <strong>Age Limit:</strong> {place.ageLimit}
+            </p>
+          </div>
+        )}
+
+        {place.category === "Monuments & Nature" && (
+          <div>
+            <strong>Bes Time to Visit:</strong> {place.best_time}
+            <p>
+              <strong>Amenities Available:</strong>{" "}
+              {place.amenities.join(", ") || "None"}
+            </p>
+            <p>
+              <strong>Ticket per person:</strong> {place.entryPrice || "Free"}
             </p>
           </div>
         )}

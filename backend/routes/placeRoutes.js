@@ -5,11 +5,11 @@ const Place = require("../models/Place");
 const User = require("../models/User");
 
 // ✅ Auth Middleware (inline or extract later if desired)
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   const authHeader = req.header("Authorization");
   if (!authHeader) return res.status(401).json({ msg: "No token provided" });
 
-  const token = authHeader.split(" ")[1]; // strips "Bearer"
+  const token = authHeader.split(" ")[1];
   if (!token) return res.status(401).json({ msg: "Malformed token" });
 
   try {
@@ -17,10 +17,29 @@ const authMiddleware = (req, res, next) => {
       token,
       process.env.JWT_SECRET || "yourSecretKey"
     );
-    req.user = decoded;
+    console.log("✅ Token decoded:", decoded);
+
+    if (decoded.id === "admin-id" && decoded.role === "admin") {
+      req.user = {
+        id: "admin-id",
+        role: "admin",
+        name: "Super Admin",
+      };
+      return next();
+    }
+
+    // 👉 Fetch full user object
+    const user = await User.findById(decoded.id);
+    if (!user) return res.status(404).json({ msg: "User not found" });
+    console.log("👤 User fetched:", user);
+
+    req.user = user;
     next();
   } catch (err) {
-    return res.status(401).json({ msg: "Invalid token" });
+    console.error("💥 JWT verification failed:", err.name, err.message);
+    const msg =
+      err.name === "TokenExpiredError" ? "Session expired" : "Invalid token";
+    return res.status(401).json({ msg });
   }
 };
 
@@ -67,6 +86,29 @@ router.post("/", authMiddleware, async (req, res) => {
       images,
       category, // ✅ consistent with schema
       addedBy: business._id,
+      timing: req.body.timing || { open: "10:00 AM", close: "11:00 PM" },
+      amenities: req.body.amenities || [],
+      priceRange: req.body.priceRange || "Affordable",
+      games: req.body.games || "N/A",
+      gamePricing: req.body.gamePricing || "N/A",
+      ageLimit: req.body.ageLimit || "All Ages",
+      foodType: req.body.foodType || "N/A",
+      menu: req.body.menu || "N/A",
+      entryPrice: req.body.entryPrice || "Free",
+      otherInfo: req.body.otherInfo || "N/A",
+      featured: req.body.featured || false,
+      contact: {
+        phone: req.body.contact?.phone || "N/A",
+        website: req.body.contact?.website || "N/A",
+        instagram: req.body.contact?.instagram || "N/A",
+      },
+      viewsThisMonth: 0, // Initialize views
+      placesPosted: 1, // Incremented later
+      rating: 0, // Initialize rating
+      favorites: [], // Initialize empty favorites
+      reviews: [], // Initialize empty reviews
+      createdAt: new Date(),
+      best_time: req.body.best_time || "Anytime",
     });
 
     await newPlace.save();

@@ -30,10 +30,7 @@ const placeSchema = new mongoose.Schema({
     website: String,
     instagram: String,
   },
-  timing: {
-    open: String, // e.g. "10:00 AM"
-    close: String, // e.g. "11:00 PM"
-  },
+  timing: {type: String}, // e.g. "10:00 AM - 11:00 PM"},
   best_time: { type: String }, // e.g. "Evening", "Weekend"
   amenities: { type: [String] }, // e.g. ["WiFi", "Parking", "AC"]
   priceRange: { type: String }, // e.g. “₹₹”, “Affordable”, “Premium”

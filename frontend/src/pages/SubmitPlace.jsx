@@ -9,6 +9,7 @@ export default function SubmitPlace() {
   const navigate = useNavigate();
   const token = useSelector((state) => state.user.token);
   const role = useSelector((state) => state.user.role);
+  
 
   const onSubmit = async (data) => {
     try {
@@ -43,7 +44,7 @@ export default function SubmitPlace() {
         images: uploadedImageUrls,
         category,
         location: {
-          address: data.location, 
+          address: data.location,
         },
         contact: {
           phone: "Add optional phone field?",
@@ -51,10 +52,6 @@ export default function SubmitPlace() {
           website: "",
         },
       };
-
-      // 🔐 Attach your JWT token (from Redux or localStorage)
-      console.log("🧪 Token before submit:", token);
-      console.log("🔑 Auth Header:", `Bearer ${token}`);
 
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/places`, {
         method: "POST",
@@ -115,7 +112,9 @@ export default function SubmitPlace() {
               <option value="Gaming & Entertainment">
                 Gaming & Entertainment
               </option>
-              <option value="Monuments & Nature">Monuments & Nature</option>
+              {role === "admin" && (
+                <option value="Monuments & Nature">Monuments & Nature</option>
+              )}
             </select>
           </div>
 
