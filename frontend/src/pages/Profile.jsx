@@ -44,7 +44,7 @@ export default function Profile() {
               <div>
                 <p className="text-sm text-gray-500">Business Description</p>
                 <h2 className="text-lg font-semibold">
-                  {user?.description || "No description provided."}
+                  {user?.businessDesc || "No description provided."}
                 </h2>
               </div>
             </>

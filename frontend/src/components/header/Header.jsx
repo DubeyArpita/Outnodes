@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../store/userSlice";
 import Button from "../Button";
+import Logo from "../../../public/favicon.ico";
 
 export default function Header() {
   const { isLoggedIn, role, user } = useSelector((state) => state.user);
@@ -20,13 +21,20 @@ export default function Header() {
 
   return (
     <header className="flex items-center justify-between px-6 py-4 shadow-md bg-white sticky top-0 z-50">
-      <h1
-        className="text-2xl font-bold text-blue-600 tracking-wide cursor-pointer"
-        onClick={() => navigate("/")}
-      >
-        Outnodes
-      </h1>
-
+      <div className="flex items-center gap-4 cursor-pointer">
+        <img
+          src={Logo}
+          alt="Logo"
+          className="w-12 h-12 cursor-pointer"
+          onClick={() => navigate("/")}
+        />
+        <h1
+          className="text-3xl font-bold text-blue-600 tracking-wide cursor-pointer hover:text-indigo-700 transition-colors"
+          onClick={() => navigate("/")}
+        >
+          Outnodes
+        </h1>
+      </div>
       <nav className="flex gap-4 items-center">
         {isLoggedIn && role === "explorer" && (
           <>
@@ -44,7 +52,11 @@ export default function Header() {
 
         {isLoggedIn && role === "admin" && (
           <>
-            <Button label="All Places" to="/all-places-admin" variant="primary" />
+            <Button
+              label="All Places"
+              to="/all-places-admin"
+              variant="primary"
+            />
             <Button label="List a Place" to="/submit-place" variant="primary" />
           </>
         )}

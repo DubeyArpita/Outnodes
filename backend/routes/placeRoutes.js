@@ -187,4 +187,112 @@ router.delete("/:id", authMiddleware, async (req, res) => {
   res.json({ msg: "Place deleted successfully" });
 });
 
+router.post("/:id/favorite", authMiddleware, async (req, res) => {
+  try {
+    const placeId = req.params.id;
+    const userId = req.user.id;
+
+    // Add the user's ID to the place's favorites list
+    const updatedPlace = await Place.findByIdAndUpdate(
+      placeId,
+      { $addToSet: { favorites: userId } }, // $addToSet prevents duplicates
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedPlace) {
+      return res.status(404).json({ msg: "Place not found" });
+    }
+
+    res
+      .status(200)
+      .json({ msg: "Place added to favorites", place: updatedPlace });
+  } catch (err) {
+    console.error("Error adding favorite:", err.message);
+    res.status(500).json({ msg: "Server error", error: err.message });
+  }
+});
+
+router.delete("/:id/favorite", authMiddleware, async (req, res) => {
+  try {
+    const placeId = req.params.id;
+    const userId = req.user.id;
+
+    // Remove the user's ID from the place's favorites list
+    const updatedPlace = await Place.findByIdAndUpdate(
+      placeId,
+      { $pull: { favorites: userId } }, // $pull removes the item from the array
+      { new: true }
+    );
+
+    if (!updatedPlace) {
+      return res.status(404).json({ msg: "Place not found" });
+    }
+
+    res
+      .status(200)
+      .json({ msg: "Place removed from favorites", place: updatedPlace });
+  } catch (err) {
+    console.error("Error removing favorite:", err.message);
+    res.status(500).json({ msg: "Server error", error: err.message });
+  }
+});
+
+router.post("/:id/reviews", authMiddleware, async (req, res) => {
+  const { rating, comment } = req.body;
+  const placeId = req.params.id;
+  const userId = req.user.id;
+
+  // Basic validation
+  if (!rating || !comment) {
+    return res
+      .status(400)
+      .json({ msg: "Please provide a rating and a comment." });
+  }
+
+  try {
+    const place = await Place.findById(placeId);
+    if (!place) {
+      return res.status(404).json({ msg: "Place not found" });
+    }
+
+    // Optional: Check if the user has already reviewed this place
+    const existingReview = place.reviews.find(
+      (rev) => rev.user.toString() === userId
+    );
+
+    if (existingReview) {
+      return res
+        .status(400)
+        .json({ msg: "You have already reviewed this place." });
+    }
+
+    const newReview = {
+      user: userId,
+      rating,
+      comment,
+    };
+
+    place.reviews.unshift(newReview); // Add to the beginning of the array
+
+    // Recalculate the average rating for the place
+    const totalRating = place.reviews.reduce(
+      (acc, item) => item.rating + acc,
+      0
+    );
+    place.rating = totalRating / place.reviews.length;
+
+    await place.save();
+
+    // Populate user info for the response to the frontend
+    await place.populate("reviews.user", "name profilePic");
+
+    res
+      .status(201)
+      .json({ msg: "Review added successfully", reviews: place.reviews });
+  } catch (err) {
+    console.error("Error adding review:", err.message);
+    res.status(500).json({ msg: "Server error", error: err.message });
+  }
+});
+
 module.exports = router;

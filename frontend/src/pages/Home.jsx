@@ -35,7 +35,7 @@ export default function Home() {
                 Start Exploring
               </button>
               <button
-                onClick={() => navigate("/submit-place")}
+                onClick={() => navigate("/register")}
                 className="px-6 py-3 text-blue-700 border-2 border-blue-600 rounded-lg bg-white hover:bg-blue-50 font-semibold shadow transition-all duration-200"
               >
                 List Your Business

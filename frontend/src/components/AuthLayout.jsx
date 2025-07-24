@@ -22,15 +22,22 @@ export default function AuthLayout({ children, authentication = true, role }) {
     document.title = isAuthorized ? "Outnodes" : "Unauthorized";
   }, [isAuthorized]);
 
-  if (!isAuthorized) {
-    return (
-      <Navigate
-        to={authentication ? "/login" : "/"}
-        state={{ from: location }}
-        replace
-      />
-    );
+  if (!authentication && isLoggedIn) {
+    if (userRole === "admin")
+      return <Navigate to="/all-places-admin" replace />;
+    if (userRole === "business") return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/discover" replace />;
   }
+
+  // if (!isAuthorized) {
+  //   return (
+  //     <Navigate
+  //       to={authentication ? "/register" : "/"}
+  //       state={{ from: location }}
+  //       replace
+  //     />
+  //   );
+  // }
 
   return children;
 }

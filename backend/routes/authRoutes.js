@@ -2,6 +2,25 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const Place = require("../models/Place");
+
+const authMiddleware = (req, res, next) => {
+  const authHeader = req.header("Authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ msg: "Authorization denied" });
+  }
+  try {
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET || "yourSecretKey"
+    );
+    req.user = decoded; // Attaches { id, role } to the request
+    next();
+  } catch (err) {
+    res.status(401).json({ msg: "Token is not valid" });
+  }
+};
 
 router.post("/register", async (req, res) => {
   const { email } = req.body;
@@ -103,6 +122,21 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ msg: "Login failed", error: err.message });
+  }
+});
+
+router.get("/favorites", authMiddleware, async (req, res) => {
+  try {
+    // Find all places where the 'favorites' array contains the logged-in user's ID.
+    const favoritePlaces = await Place.find({ favorites: req.user.id });
+
+    res.status(200).json({
+      success: true,
+      favorites: favoritePlaces,
+    });
+  } catch (err) {
+    console.error("Error fetching favorites:", err.message);
+    res.status(500).json({ msg: "Server error", error: err.message });
   }
 });
 

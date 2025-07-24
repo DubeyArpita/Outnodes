@@ -56,19 +56,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/food",
-        element: <ThemePage theme="Food Outlet" />,
+        element: (
+          <AuthLayout authentication={true} role="explorer">
+            <ThemePage theme="Food Outlet" />,
+          </AuthLayout>
+        ),
       },
       {
         path: "/monument-nature",
-        element: <ThemePage theme="Monuments & Nature" />,
+        element: (
+          <AuthLayout authentication={true} role="explorer">
+            <ThemePage theme="Monuments & Nature" />,
+          </AuthLayout>
+        ),
       },
       {
         path: "/club-nightlife",
-        element: <ThemePage theme="Club & Nightlife" />,
+        element: (
+          <AuthLayout authentication={true} role="explorer">
+            <ThemePage theme="Club & Nightlife" />,
+          </AuthLayout>
+        ),
       },
       {
         path: "/gaming-entertainment",
-        element: <ThemePage theme="Gaming & Entertainment" />,
+        element: (
+          <AuthLayout authentication={true} role="explorer">
+            <ThemePage theme="Gaming & Entertainment" />,
+          </AuthLayout>
+        ),
       },
       {
         path: "/your-places",

@@ -17,7 +17,7 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    setLoading(true); // ⏳ Start loader
+    setLoading(true);
     setLoginError("");
     try {
       const res = await fetch(
@@ -26,9 +26,8 @@ export default function Login() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            email: data.username, // assuming your backend uses "email"
+            email: data.username,
             password: data.password,
-            isLoggedIn: true, // optional, depending on your backend
           }),
         }
       );
@@ -36,25 +35,50 @@ export default function Login() {
       const result = await res.json();
 
       if (res.ok && result.user) {
+        const userData = {
+          id: result.user._id || result.user.id,
+          name: result.user.name || "Admin",
+          email: result.user.email,
+          role: result.user.role,
+          profilePic: result.user.profilePic,
+          businessPhone: result.user.businessPhone,
+          location: result.user.location,
+          businessDesc: result.user.businessDesc,
+          idCard: result.user.idCard,
+          phone: result.user.phone,
+          interests: result.user.interests,
+        };
+
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("role", userData.role);
+        localStorage.setItem("user", JSON.stringify(userData));
+
         dispatch(
           loginUser({
-            role: result.user.role,
-            user: {
-              id: result.user._id || result.user.id, // handle both cases
-              name: result.user.name || "Admin",
-              email: result.user.email,
-              role: result.user.role,
-              profilePic: result.user.profilePic,
-              businessPhone: result.user.businessPhone,
-              location: result.user.location,
-              businessDesc: result.user.businessDesc,
-              idCard: result.user.idCard,
-              phone: result.user.phone,
-              interests: result.user.interests,
-            },
+            user: userData,
+            role: userData.role,
             token: result.token,
           })
         );
+        // dispatch(
+        //   loginUser({
+        //     role: result.user.role,
+        //     user: {
+        //       id: result.user._id || result.user.id, // handle both cases
+        //       name: result.user.name || "Admin",
+        //       email: result.user.email,
+        //       role: result.user.role,
+        //       profilePic: result.user.profilePic,
+        //       businessPhone: result.user.businessPhone,
+        //       location: result.user.location,
+        //       businessDesc: result.user.businessDesc,
+        //       idCard: result.user.idCard,
+        //       phone: result.user.phone,
+        //       interests: result.user.interests,
+        //     },
+        //     token: result.token,
+        //   })
+        // );
 
         if (result.user.role === "explorer") {
           setTimeout(() => navigate("/discover"), 0);
@@ -67,6 +91,7 @@ export default function Login() {
         setLoginError(result.msg || "Invalid credentials");
       }
     } catch (err) {
+      console.error("Login request failed:", err);
       setLoginError("Login failed — please try again later.");
     } finally {
       setLoading(false); // ✅ End loader
@@ -85,7 +110,7 @@ export default function Login() {
           <div>
             <label className="block mb-1 font-medium">Username</label>
             <input
-              type="text"
+              type="email"
               {...register("username", { required: "Username is required" })}
               className="w-full px-4 py-2 border rounded-md focus:outline-blue-500"
               placeholder="e.g. arpita_dev"
