@@ -60,32 +60,16 @@ export default function Login() {
             token: result.token,
           })
         );
-        // dispatch(
-        //   loginUser({
-        //     role: result.user.role,
-        //     user: {
-        //       id: result.user._id || result.user.id, // handle both cases
-        //       name: result.user.name || "Admin",
-        //       email: result.user.email,
-        //       role: result.user.role,
-        //       profilePic: result.user.profilePic,
-        //       businessPhone: result.user.businessPhone,
-        //       location: result.user.location,
-        //       businessDesc: result.user.businessDesc,
-        //       idCard: result.user.idCard,
-        //       phone: result.user.phone,
-        //       interests: result.user.interests,
-        //     },
-        //     token: result.token,
-        //   })
-        // );
 
         if (result.user.role === "explorer") {
-          setTimeout(() => navigate("/discover"), 0);
+          navigate("/discover");
+          //setTimeout(() => navigate("/discover"), 0);
         } else if (result.user.role === "business") {
-          setTimeout(() => navigate("/dashboard"), 0);
+          navigate("/dashboard");
+          //setTimeout(() => navigate("/dashboard"), 0);
         } else if (result.user.role === "admin") {
-          setTimeout(() => navigate("/all-places-admin"), 0);
+          navigate("/all-places-admin");
+          //setTimeout(() => navigate("/all-places-admin"), 0);
         }
       } else {
         setLoginError(result.msg || "Invalid credentials");

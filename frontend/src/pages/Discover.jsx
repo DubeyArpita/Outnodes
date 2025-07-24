@@ -52,11 +52,11 @@ export default function Discover() {
             <img
               src={cat.image}
               alt={cat.title}
-              className="w-full h-full object-cover group-hover:brightness-90 transition-all duration-300"
+              className="w-full h-full object-cover group-hover:brightness-100 transition-all duration-300"
             />
-            <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-white text-center px-5">
+            <div className="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-white text-center px-5">
               <h2 className="text-2xl font-bold">{cat.title}</h2>
-              <p className="mt-2 text-sm">{cat.description}</p>
+              <p className="mt-2 text-md">{cat.description}</p>
               <button className="mt-4 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-sm rounded shadow">
                 Explore →
               </button>
