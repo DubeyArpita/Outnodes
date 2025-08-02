@@ -85,21 +85,21 @@ export default function Home() {
                 image: "/monuments.jpg",
                 description:
                   "Find peace in nature or explore historic landmarks.",
-                link: "/nature",
+                link: "/monument-nature",
               },
               {
                 title: "Clubs & Nightlife",
                 image: "/club.jpg",
                 description:
                   "Experience vibrant nightlife and late-night hangouts.",
-                link: "/nightlife",
+                link: "/club-nightlife",
               },
               {
                 title: "Gaming & Entertainment",
                 image: "/entertainment.jpg",
                 description:
                   "Unwind with arcades, gaming zones, and fun spaces.",
-                link: "/gaming",
+                link: "/gaming-entertainment",
               },
             ].map((card, i) => (
               <div
