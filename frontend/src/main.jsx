@@ -22,7 +22,7 @@ import Pricing from "./pages/Pricing.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // Your base layout with Header/Footer
+    element: <App />,
     children: [
       { path: "/", element: <Home /> },
       {

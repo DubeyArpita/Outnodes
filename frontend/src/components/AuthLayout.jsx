@@ -28,16 +28,6 @@ export default function AuthLayout({ children, authentication = true, role }) {
     if (userRole === "business") return <Navigate to="/dashboard" replace />;
     return <Navigate to="/discover" replace />;
   }
-
-  // if (!isAuthorized) {
-  //   return (
-  //     <Navigate
-  //       to={authentication ? "/register" : "/"}
-  //       state={{ from: location }}
-  //       replace
-  //     />
-  //   );
-  // }
-
+  
   return children;
 }
