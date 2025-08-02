@@ -53,7 +53,7 @@ const Pricing = () => {
         </h1>
         <p className="text-center text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
           Whether you're just starting out or scaling across the city,{" "}
-          <span className="font-semibold text-indigo-600">Outnodes</span>
+          <span className="font-semibold text-indigo-600">Outnodes </span>
           has a plan to match your business ambition.
         </p>
 
